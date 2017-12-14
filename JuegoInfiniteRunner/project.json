@@ -17,7 +17,8 @@
         "src/Moneda.js",
         "src/Jugador.js",
         "src/ControlesLayer.js",
-        "src/Enemigo.js"
+        "src/Enemigo.js",
+        "src/SiguienteNivel.js"
 
 
 

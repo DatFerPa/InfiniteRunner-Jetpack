@@ -13,6 +13,7 @@ var res = {
     jugador_subiendo_plist : "res/jugador_subiendo.plist",
     boton_saltar_png: "res/boton_saltar.png",
     animacion_cuervo_png: "res/animacion_cuervo.png",
+    boton_siguiente_png : "res/boton_siguiente.png",
     animacion_cuervo_plist: "res/animacion_cuervo.plist",
     moneda_plist : "res/moneda.plist"
 

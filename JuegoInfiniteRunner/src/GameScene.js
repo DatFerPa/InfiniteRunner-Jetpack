@@ -3,6 +3,7 @@ var tipoJugador = 2;
 var tipoMoneda = 3;
 var tipoEnemigo = 4;
 var tipoJugadorExt = 5;
+var tipoMeta = 6;
 
 var GameLayer = cc.Layer.extend({
     space:null,
@@ -14,6 +15,7 @@ var GameLayer = cc.Layer.extend({
     jugador: null,
     mapa: null,
     mapaAncho: null,
+    mapaAlto:null,
 
     ctor:function () {
 
@@ -41,6 +43,9 @@ var GameLayer = cc.Layer.extend({
         // suelo y jugador
         this.space.addCollisionHandler(tipoSuelo, tipoJugador,
               null, null, this.collisionSueloConJugador.bind(this), null);
+
+         this.space.addCollisionHandler(tipoMeta,tipoJugador,
+            null,this.colisionMetaConJugador.bind(this),null,null);
 
         //jugador y enemigos
          this.space.addCollisionHandler(tipoJugadorExt,tipoEnemigo,
@@ -106,6 +111,9 @@ var GameLayer = cc.Layer.extend({
 
            // actualizar cámara (posición de la capa).
            var posicionXJugador = this.jugador.body.p.x - 100;
+          // var posicionYJugador = this.jugador.body.p.y - 50;
+
+           //var posicionYJugador = this.jugador.body.p.y
            this.setPosition(cc.p( -posicionXJugador,0));
 
            // Caída, sí cae vuelve a la posición inicial
@@ -129,6 +137,12 @@ var GameLayer = cc.Layer.extend({
 
              this.jugador.body.p = cc.p(100,100);
 
+
+    },colisionMetaConJugador:function(arbiter,space){
+
+        console.log("meta");
+        cc.director.pause();
+        this.getParent().addChild(new SiguienteNivel());
 
     },collisionJugadorConMoneda:function (arbiter, space) {
                 this._emitter.setEmissionRate(5);
@@ -181,6 +195,22 @@ var GameLayer = cc.Layer.extend({
               }
           }
 
+          var grupoMetas = this.mapa.getObjectGroup("Meta");
+          var metasArray = grupoMetas.getObjects();
+
+          for(var i = 0; i < metasArray.length; i++){
+                var meta = metasArray[i];
+                var bodyMeta = new cp.StaticBody();
+                bodyMeta.setPos(cc.p(meta.x,meta.y));
+                bodyMeta.setAngle(0);
+                var shapeMeta = new cp.BoxShape(bodyMeta,meta.width,meta.height);
+                shapeMeta.setSensor(true);
+                shapeMeta.setCollisionType(tipoMeta);
+                this.space.addStaticShape(shapeMeta);
+          }
+
+
+
           var grupoMonedas = this.mapa.getObjectGroup("Monedas");
           var monedasArray = grupoMonedas.getObjects();
           for (var i = 0; i < monedasArray.length; i++) {
@@ -209,6 +239,9 @@ var idCapaControles = 2;
 var GameScene = cc.Scene.extend({
     onEnter:function () {
         this._super();
+
+        cc.director.resume();
+
         var layer = new GameLayer();
         this.addChild(layer, 0, idCapaJuego);
 
