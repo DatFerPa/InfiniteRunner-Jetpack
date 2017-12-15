@@ -11,6 +11,7 @@ var GameLayer = cc.Layer.extend({
     tiempoEfecto:0,
     monedas: [],
     enemigos:[],
+    pinchos:[],
     formasEliminar: [],
     jugador: null,
     mapa: null,
@@ -30,6 +31,7 @@ var GameLayer = cc.Layer.extend({
         cc.spriteFrameCache.addSpriteFrames(res.jugador_subiendo_plist);
         cc.spriteFrameCache.addSpriteFrames(res.jugador_avanzando_plist);
         cc.spriteFrameCache.addSpriteFrames(res.animacion_cuervo_plist);
+        cc.spriteFrameCache.addSpriteFrames(res.pincho_plist);
 
 
         // Inicializar Space
@@ -240,6 +242,8 @@ var GameLayer = cc.Layer.extend({
             this.monedas.push(moneda);
           }
 
+
+
           var grupoEnemigos = this.mapa.getObjectGroup("Enemigos");
           var enemigosArray = grupoEnemigos.getObjects();
           for (var i = 0; i < enemigosArray.length; i++) {
@@ -248,8 +252,15 @@ var GameLayer = cc.Layer.extend({
 
               this.enemigos.push(enemigo);
           }
-
-
+            console.log("llega a crear pinchos");
+          var grupoPinchos = this.mapa.getObjectGroup("Pinchos");
+          var pinchosArray = grupoPinchos.getObjects();
+          for (var i = 0; i < pinchosArray.length; i++) {
+              var pincho = new Pincho(this,
+              cc.p(pinchosArray[i]["x"],pinchosArray[i]["y"]));
+              this.pinchos.push(pincho);
+          }
+            console.log("pinchos creados");
     }
 
 });

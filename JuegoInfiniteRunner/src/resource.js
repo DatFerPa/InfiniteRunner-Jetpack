@@ -20,7 +20,9 @@ var res = {
     boton_nivel2_png : "res/boton_nivel2.png",
     boton_menu_png : "res/boton_menu.png",
     boton_disparar_png : "res/boton_disparar.png",
-    moneda_plist : "res/moneda.plist"
+    moneda_plist : "res/moneda.plist",
+    pincho_plist : "res/pincho.plist",
+    pincho_png : "res/pincho.png"
 
 
 

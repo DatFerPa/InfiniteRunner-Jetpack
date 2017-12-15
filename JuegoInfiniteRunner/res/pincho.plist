@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>pincho1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,0},{37,38}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{1,1},{37,38}}</string>
+				<key>sourceSize</key>
+				<string>{40,40}</string>
+			</dict>
+
+			<key>pincho2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,68},{37,38}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{1,1},{37,38}}</string>
+				<key>sourceSize</key>
+				<string>{40,40}</string>
+			</dict>
+
+			<key>pincho3.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{0,39},{37,28}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false/>
+				<key>sourceColorRect</key>
+				<string>{{1,7},{37,28}}</string>
+				<key>sourceSize</key>
+				<string>{40,40}</string>
+			</dict>
+
+		</dict>
+
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>size</key>
+			<string>{64,128}</string>
+			<key>textureFileName</key>
+			<string>pincho.png</string>
+			</dict>
+		</dict>
+</plist>

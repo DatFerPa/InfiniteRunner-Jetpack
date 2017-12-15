@@ -18,7 +18,8 @@
         "src/Jugador.js",
         "src/ControlesLayer.js",
         "src/Enemigo.js",
-        "src/SiguienteNivel.js"
+        "src/SiguienteNivel.js",
+        "src/Pincho.js"
 
 
 
