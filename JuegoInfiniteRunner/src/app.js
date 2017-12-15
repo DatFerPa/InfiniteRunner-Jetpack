@@ -14,24 +14,34 @@ var MenuLayer = cc.Layer.extend({
                 this.addChild(spriteFondoTitulo);
 
                 //MenuItemSprite para cada botón
-                var menuBotonJugar = new cc.MenuItemSprite(
-                    new cc.Sprite(res.boton_jugar_png), // IMG estado normal
-                    new cc.Sprite(res.boton_jugar_png), // IMG estado pulsado
-                    this.pulsarBotonJugar, this);
+                var menuNivel2 = new cc.MenuItemSprite(
+                    new cc.Sprite(res.boton_nivel2_png), // IMG estado normal
+                    new cc.Sprite(res.boton_nivel2_png), // IMG estado pulsado
+                    this.pulsarBotonNivel2, this);
 
 
                 // creo el menú pasándole los botones
-                var menu = new cc.Menu(menuBotonJugar);
+                var nivel2 = new cc.Menu(menuNivel2);
                 // Asigno posición central
-                menu.setPosition(cc.p(size.width / 2, size.height * 0.25));
+                nivel2.setPosition(cc.p(size.width / 2, size.height * 0.25));
                 // Añado el menú a la escena
-                this.addChild(menu);
+                this.addChild(nivel2);
 
+                var menuNivel1 = new cc.MenuItemSprite(
+                new cc.Sprite(res.boton_nivel1_png),
+                new cc.Sprite(res.boton_nivel1_png),
+                this.pulsarBotonNivel1,this);
+
+                var nivel1 = new cc.Menu(menuNivel1);
+                nivel1.setPosition(cc.p(size.width / 2,size.height * 0.45));
+                this.addChild(nivel1);
 
         return true;
-    }, pulsarBotonJugar : function(){
-               cc.director.runScene(new GameScene());
-         }
+    }, pulsarBotonNivel2 : function(){
+               cc.director.runScene(new GameSceneNivel2());
+    }, pulsarBotonNivel1 : function(){
+                cc.director.runScene(new GameSceneNivel1());
+    }
 
 });
 

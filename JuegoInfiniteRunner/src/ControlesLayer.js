@@ -21,6 +21,13 @@ var ControlesLayer = cc.Layer.extend({
 
         this.addChild(this.spriteBotonSaltar);
 
+        //botonTurbo
+        this.spriteBotonTurbo = cc.Sprite.create(res.boton_disparar_png);
+        this.spriteBotonTurbo.setPosition(
+            cc.p(size.width*0.9,size.height*0.7));
+
+        this.addChild(this.spriteBotonTurbo);
+
         // Registrar Mouse Down
         cc.eventManager.addListener({
             event: cc.EventListener.MOUSE,
@@ -43,7 +50,16 @@ var ControlesLayer = cc.Layer.extend({
             var gameLayer = instancia.getParent().getChildByTag(idCapaJuego);
             // tenemos el objeto GameLayer
             gameLayer.jugador.saltar();
+        }
 
+        var areaTurbo = instancia.spriteBotonTurbo.getBoundingBox();
+
+        if(cc.rectContainsPoint(areaTurbo,
+            cc.p(event.getLocationX(), event.getLocationY()))){
+
+            var gameLayer = instancia.getParent().getChildByTag(idCapaJuego);
+
+            gameLayer.jugador.turbo();
 
         }
     },agregarMoneda:function(){

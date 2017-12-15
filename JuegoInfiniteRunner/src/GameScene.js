@@ -16,11 +16,15 @@ var GameLayer = cc.Layer.extend({
     mapa: null,
     mapaAncho: null,
     mapaAlto:null,
+    numeroNivel:null,
 
-    ctor:function () {
+    ctor:function (numeroNivel) {
 
         this._super();
         var size = cc.winSize;
+
+        console.log(size.height);
+        this.numeroNivel = numeroNivel;
 
         cc.spriteFrameCache.addSpriteFrames(res.moneda_plist);
         cc.spriteFrameCache.addSpriteFrames(res.jugador_subiendo_plist);
@@ -65,6 +69,8 @@ var GameLayer = cc.Layer.extend({
             this._emitter.shapeType = cc.ParticleSystem.STAR_SHAPE;
             this.addChild(this._emitter,10);
 
+        this.addChild(this.jugador._emitterTurbo,10);
+
 
 
         return true;
@@ -88,6 +94,8 @@ var GameLayer = cc.Layer.extend({
                   this._emitter.setEmissionRate(0);
                   this.tiempoEfecto = 0;
              }
+
+            this.jugador.turboUpdater(dt);
 
 
          // Controlar el angulo (son radianes) max y min.
@@ -113,12 +121,19 @@ var GameLayer = cc.Layer.extend({
            var posicionXJugador = this.jugador.body.p.x - 100;
           // var posicionYJugador = this.jugador.body.p.y - 50;
 
-           //var posicionYJugador = this.jugador.body.p.y
-           this.setPosition(cc.p( -posicionXJugador,0));
+
+           var posicionYJugador = 0;
+
+           var jugadorY = this.jugador.body.p.y;
+           var tamWin = cc.winSize.height;
+
+
+           this.setPosition(cc.p( -posicionXJugador,-posicionYJugador));
 
            // Caída, sí cae vuelve a la posición inicial
             if( this.jugador.body.p.y < -100){
                this.jugador.body.p = cc.p(100,100);
+               this.jugador.turbos = 3;
             }
 
         // Eliminar formas:
@@ -136,13 +151,14 @@ var GameLayer = cc.Layer.extend({
     },collisionJugadorConenemigo:function(arbiter, space){
 
              this.jugador.body.p = cc.p(100,100);
+             this.jugador.turbos = 3;
 
 
     },colisionMetaConJugador:function(arbiter,space){
 
         console.log("meta");
         cc.director.pause();
-        this.getParent().addChild(new SiguienteNivel());
+        this.getParent().addChild(new SiguienteNivel(this.numeroNivel));
 
     },collisionJugadorConMoneda:function (arbiter, space) {
                 this._emitter.setEmissionRate(5);
@@ -162,10 +178,15 @@ var GameLayer = cc.Layer.extend({
 
     },collisionSueloConJugador:function (arbiter, space) {
 
-            this.jugador.tocaSuelo();
+            this.jugador.tocaSuelo(this.numeroNivel);
 
     },cargarMapa:function () {
-          this.mapa = new cc.TMXTiledMap(res.mapa1_tmx);
+        if(this.numeroNivel == 1){
+            this.mapa = new cc.TMXTiledMap(res.mapa1_tmx);
+        }else{
+            this.mapa = new cc.TMXTiledMap(res.mapa2_tmx);
+        }
+
           // Añadirlo a la Layer
           this.addChild(this.mapa);
           // Ancho del mapa
@@ -201,7 +222,7 @@ var GameLayer = cc.Layer.extend({
           for(var i = 0; i < metasArray.length; i++){
                 var meta = metasArray[i];
                 var bodyMeta = new cp.StaticBody();
-                bodyMeta.setPos(cc.p(meta.x,meta.y));
+                bodyMeta.setPos(cc.p(meta.x+meta.width/2,meta.y+meta.height/2));
                 bodyMeta.setAngle(0);
                 var shapeMeta = new cp.BoxShape(bodyMeta,meta.width,meta.height);
                 shapeMeta.setSensor(true);
@@ -236,13 +257,28 @@ var GameLayer = cc.Layer.extend({
 var idCapaJuego = 1;
 var idCapaControles = 2;
 
-var GameScene = cc.Scene.extend({
+var GameSceneNivel1 = cc.Scene.extend({
     onEnter:function () {
         this._super();
-
+        console.log();
         cc.director.resume();
 
-        var layer = new GameLayer();
+        var layer = new GameLayer(1);
+        this.addChild(layer, 0, idCapaJuego);
+
+        var controlesLayer = new ControlesLayer();
+        this.addChild(controlesLayer, 0, idCapaControles);
+
+    }
+});
+
+var GameSceneNivel2 = cc.Scene.extend({
+    onEnter:function () {
+        this._super();
+        console.log();
+        cc.director.resume();
+
+        var layer = new GameLayer(2);
         this.addChild(layer, 0, idCapaJuego);
 
         var controlesLayer = new ControlesLayer();

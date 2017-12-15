@@ -1,6 +1,9 @@
 var SiguienteNivel = cc.LayerColor.extend({
-    ctor:function () {
+
+    numeroNivel: null,
+    ctor:function (nivel) {
          this._super();
+         this.numeroNivel = nivel
          this.init();
        },
        init:function () {
@@ -20,6 +23,12 @@ var SiguienteNivel = cc.LayerColor.extend({
        },
        pulsarSiguiente:function (sender) {
          // Volver a ejecutar la escena Prinicpal
-         cc.director.runScene(new GameScene());
+         //cc.director.runScene(new GameScene());
+         console.log(this.numeroNivel);
+         if(this.numeroNivel == 1){
+            cc.director.runScene(new GameSceneNivel2());
+         }else{
+            cc.director.runScene(new GameSceneNivel1());
+         }
        }
   });

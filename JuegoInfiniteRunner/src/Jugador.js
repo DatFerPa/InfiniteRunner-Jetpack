@@ -8,12 +8,18 @@ var Jugador = cc.Class.extend({
     aaSaltar:null,
     aaCaminar:null,
     gameLayer:null,
+    tiempoEfectoTurbo:0,
     sprite:null,
     shape:null,
     shapePie:null,
+    turbos:null,
     body:null,
+    _emitterTurbo:null,
+
 ctor:function (gameLayer, posicion) {
     this.gameLayer = gameLayer;
+
+    this.turbos = 3;
 
     // Crear animación
     var framesAnimacion = [];
@@ -84,6 +90,11 @@ ctor:function (gameLayer, posicion) {
     // añadir sprite a la capa
     gameLayer.addChild(this.sprite,10);
 
+    this._emitterTurbo = new cc.ParticleSun.create();
+    this._emitterTurbo.setEmissionRate(0);
+    this._emitterTurbo.shapeType = cc.ParticleSystem.PARTICLE_BALL_SHAPE;
+
+
     // Impulso inicial
         this.body.applyImpulse(cp.v(300, 0), cp.v(0, 0));
 
@@ -103,6 +114,29 @@ ctor:function (gameLayer, posicion) {
             this.sprite.stopAllActions();
             this.sprite.runAction(this.aaSaltar);
         }
- }
+  },turbo: function(){
+
+
+     if(this.turbos > 0){
+        console.log("TUUURBOOO!!!");
+        this.turbos --;
+        console.log("turbos restantes : "+this.turbos)
+        this._emitterTurbo.setEmissionRate(5);
+        this.tiempoEfectoTurbo = 3;
+        this.body.applyImpulse(cp.v(2000,0), cp.v(0, 0));
+     }
+
+     },turboUpdater: function(dt){
+
+         if(this.tiempoEfectoTurbo > 0){
+            this.tiempoEfectoTurbo = this.tiempoEfectoTurbo - dt;
+            this._emitterTurbo.x = this.body.p.x;
+            this._emitterTurbo.y = this.body.p.y;
+         }
+         if(this.tiempoEfectoTurbo < 0){
+            this._emitterTurbo.setEmissionRate(0);
+            this.tiempoEfectoTurbo = 0;
+         }
+     }
 
 });

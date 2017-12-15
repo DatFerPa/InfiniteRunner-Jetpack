@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="500" height="20" tilewidth="32" tileheight="32" nextobjectid="72">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="500" height="20" tilewidth="32" tileheight="32" nextobjectid="80">
  <tileset firstgid="1" name="tiles32" tilewidth="32" tileheight="32" tilecount="98" columns="14">
   <image source="tiles32.png" width="448" height="224"/>
  </tileset>
@@ -13,7 +13,7 @@
    eJzt3DtPwzAUhuFssDKwIGjTsnCHCRiQuAiQymVEsAAS//9HcCwc1URJ48RO7CTvIx2ltWjk01T+2pQ0SQAAAAAAAAAAAAAAQAhvoScAAACcfEp9SX2HnshA/ISeAABglMhzf/ak9qUOQk+kI3dSM11zvb0LOiMAGLen0BPooR2pidRUKtX3z6UupC712JCtS22U1FrAeQHAmD1LvUi9JuP7jNnEqiwbQ67Z9D/U3gEgRuozZSq10Nvd5P9nzFmoiUXMNsuHmmt1+h9a7wAQK5s1GUt1s3xoudak/6H0DgBduq/59zHluflddIyaZnkfck0992nB2DRZHhOX/mPuHQBCyq+/2f0HqS1jfF6xn0OpK6ljfftI3zdvd0FlxaZRsXHN8phzzezN5KPf2HsHgJCK1t+yz9R9WEfzWZ7P8xu9ve5wTiZfWe4j13z/7k++N5PvPO/DaxEAulK2/q7K85jX0aIsV6XO8T7qv7k1tkXXiDW5bzvuO8tdjofv3wko6s3URt8xvxYBoCur1l+b8djW0bIsj6nayrQmx8Nnnpe9TzmVOpM6qZi7j96z903m+6fUQ28AELOy9TdjO16UIT6vN7fdVx+yvO08N3MtrXi+Mvnf/fmwfJyprXMOvgoAhqLOOd+M7XhRppvXmytbSbX8b3yqbf7a9eyc+aSgn9A5HUueV+VY/juB92T5+lBji5LHKdvJ37Gs8/2B+f+R5DkAuGmy9tXJcx/rq8v+Qmd0n/LcZR+ucwiR5WXPAwD0UZO1z3Y8VM6YFTqjyfP2Ht/W8wAAffQL2INiIg==
   </data>
  </layer>
- <objectgroup name="Suelos">
+ <objectgroup name="Suelos" visible="0">
   <object id="2" x="1" y="576">
    <polyline points="0,0 127,-1 285,-160 351,-161 351,63"/>
   </object>
@@ -68,8 +68,16 @@
   <object id="54" x="5889" y="372" width="40" height="40"/>
   <object id="55" x="5805" y="293" width="40" height="40"/>
   <object id="56" x="5732" y="215" width="40" height="40"/>
+  <object id="71" x="443" y="180" width="40" height="40"/>
+  <object id="72" x="435" y="267" width="40" height="40"/>
+  <object id="73" x="440" y="113" width="40" height="40"/>
+  <object id="74" x="416" y="49" width="40" height="40"/>
+  <object id="75" x="339" y="49" width="40" height="40"/>
+  <object id="76" x="274" y="61" width="40" height="40"/>
+  <object id="77" x="241" y="111" width="40" height="40"/>
+  <object id="78" x="198" y="159" width="40" height="40"/>
  </objectgroup>
- <objectgroup name="Enemigos">
+ <objectgroup name="Enemigos" visible="0">
   <object id="39" x="499" y="300" width="40" height="40"/>
   <object id="40" x="991" y="204" width="40" height="40"/>
   <object id="41" x="1563" y="522" width="40" height="40"/>
